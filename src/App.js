@@ -1,25 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Container, Typography, Box, Stack, Grid, Button } from "@mui/material";
+import { ThemeProvider } from "@mui/system";
+import { UIProvider } from "./context/ui";
+import Appbar from "./components/appbar";
+import theme from "./styles/theme";
+import Banner from "./components/banner";
+import Products from "./components/products";
+import Footer from "./components/footer";
+import AppDrawer from "./components/drawer";
+import Promotions from "./components/promotions";
+import SearchBox from "./components/search";
+import Cart from "./components/cart";
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    document.title = "React Material UI - Home";
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container
+        disableGutters
+        maxWidth="xl"
+        sx={{
+          background: "#fff",
+        }}
+      >
+        <Stack>
+          <UIProvider>
+            <Appbar />
+            <Banner />
+            <Promotions />
+            <SearchBox />
+            <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
+              <Typography variant="h4">Our Products</Typography>
+            </Box>
+            <Products />
+            <Footer />
+            <AppDrawer />
+            <Cart />
+          </UIProvider>
+        </Stack>
+      </Container>
+    </ThemeProvider>
   );
 }
 
